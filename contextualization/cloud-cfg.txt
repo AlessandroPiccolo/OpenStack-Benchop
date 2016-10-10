@@ -17,4 +17,5 @@ runcmd:
  - sudo apt --yes --force-yes install python-celery-common
  - sudo pip install celery
  - sudo pip install Flask
- - sudo git clone https://github.com/AlessandroPiccolo/labb3 /home/ubuntu/labb3
+ - sudo git clone https://github.com/AndreaRylander/Cloudgroup11.git  this is going to give error because the repositroy is private
+ 
