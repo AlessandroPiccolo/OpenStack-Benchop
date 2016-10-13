@@ -31,7 +31,7 @@ RUN sudo pip install -r Cloudgroup11/test_application/requirements.txt
 EXPOSE 80
 
 # Set the default directory where CMD will execute
-WORKDIR Cloudgroup11/test_application
+WORKDIR Cloudgroup11/test_application/
 
 # Set the default command to execute
 # when creating a new container
