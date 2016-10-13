@@ -1,6 +1,5 @@
-ubuntu@alessandro-vm-auto2:~$ cat Dockerfile 
 ############################################################
-# Dockerfile to build Python WSGI Application Containers
+# Dockerfile to build Python Flask Application Containers
 # Based on Ubuntu
 ############################################################
 
