@@ -8,7 +8,7 @@ import keystoneclient.v3.client as ksclient
 from keystoneauth1 import loading
 from keystoneauth1 import session
 
-flavor = "m1.small" 
+flavor = "c1.small" 
 private_net = "g2015034-net_2"
 floating_ip_pool_name = "public"
 floating_ip = None
