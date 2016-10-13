@@ -8,27 +8,25 @@ ubuntu@alessandro-vm-auto2:~$ cat Dockerfile
 FROM ubuntu
 
 # File Author / Maintainer
-MAINTAINER Maintaner Name
-
+#MAINTAINER Maintaner Name what does this do : )?
 
 # Add the application resources URL
 #RUN echo deb http://download.fpcomplete.com/ubuntu xenial main|sudo tee /etc/apt/sources.list.d/fpco.list
-RUN echo "deb http://archive.ubuntu.com/ubuntu/ $(lsb_release -sc) main universe" >> /etc/apt/sources.list
+RUN sudo echo "deb http://archive.ubuntu.com/ubuntu/ $(lsb_release -sc) main universe" >> /etc/apt/sources.list
 
 # Update the sources list
-RUN apt-get update
+RUN sudo apt-get update
 
 # Install basic applications
-RUN apt-get install -y tar git curl nano wget dialog net-tools build-essential
+RUN sudo apt-get install -y tar git curl nano wget dialog net-tools build-essential
 
 # Install Python and Basic Python Tools
-RUN apt-get install -y python python-dev python-distribute python-pip
+RUN sudo apt-get install -y python python-dev python-distribute python-pip
 
 RUN git clone https://github.com/AndreaRylander/Cloudgroup11.git
 
-
 # Get pip to download and install requirements:
-RUN pip install -r Cloudgroup11/test_application/requirements.txt
+RUN sudo pip install -r Cloudgroup11/test_application/requirements.txt
 
 # Expose ports
 EXPOSE 80
