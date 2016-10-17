@@ -42,7 +42,7 @@ def start_benchmark_task():
     allResults.append(results)
     #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
     #print("---Execution time %s seconds ---" % (time.time() - start_time))
-    #return str(allResults)
+    return HELLO DUDE #str(allResults)
 
 if(__name__ == '__main__'):
     app.run(host = '0.0.0.0', debug = True)
