@@ -13,7 +13,7 @@ from celery_tasks import benchmark
 
 # Creates celery worker
 env = os.environ
-CELERY_BROKER_URL = env.get('CELERY_BROKER_URL','amqp://group_11:wearegroup_11@localhost/group_11_vhost'),
+CELERY_BROKER_URL = env.get('CELERY_BROKER_URL','amqp://group_11:wearegroup_11@localhost/group_11_vhost')
 CELERY_RESULT_BACKEND = env.get('CELERY_RESULT_BACKEND','amqp://')
 
 celery = Celery('tasks',
@@ -33,11 +33,11 @@ problems = range(1, 3) #range(1, 7) # List, for python 3.x: list(range(1, 7))
 def start_benchmark_task():
     #start_time = time.time()
     # Store the reulsts, name of solver, execution time and relative error
-    all_results = {}
+    all_results = []
     # Sends tasks (request) to rabbit
     for problem_to_solve in problems:
         #all_results.update(celery.send_task('celery_tasks.benchmark', args = [problem_to_solve]))
-        all_results.update(benchmark.delay(problem_to_solve))
+        all_results.append(benchmark.delay(problem_to_solve))
     #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
     #print("---Execution time %s seconds ---" % (time.time() - start_time))
     return [t.get() for t in all_results]
