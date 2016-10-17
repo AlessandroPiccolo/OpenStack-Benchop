@@ -43,8 +43,8 @@ def start_benchmark_task():
     #herp = group(benchmark.delay(problem_to_solve) for problem_to_solve in problems).get()
     g = group(benchmark.s(1), benchmark.s(2))
     herp = g()
-    herp.get()
-    print herp
+    result_maybe = herp.get()
+    print result_maybe
     #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
     #print("---Execution time %s seconds ---" % (time.time() - start_time))
     return "hello is it working?"
