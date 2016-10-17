@@ -35,7 +35,7 @@ def start_benchmark_task():
     all_results = {}
     # Sends tasks (request) to rabbit
     for problem_to_solve in problems:
-        all_results.append(celery.send_task('celery_tasks.benchmark', args = [problem_to_solve]))
+        all_results.update(celery.send_task('celery_tasks.benchmark', args = [problem_to_solve]))
     #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
     #print("---Execution time %s seconds ---" % (time.time() - start_time))
     return [t.get() for t in all_results]
