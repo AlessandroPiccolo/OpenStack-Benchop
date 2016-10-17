@@ -12,12 +12,15 @@ celery = Celery('tasks',
                 backend = CELERY_RESULT_BACKEND)
 
 # Run octave benchmark test for a specific problem (enviroment), returns list of time and rel error
+#Making time into normal array and then "flattining"
 @celery.task(name = 'celery_tasks.benchmark')
 def benchmark(problem_to_solve):
         time, relerr, filepaths = octave.tablee(problem_to_solve)
-        print("time: %s, type = %s " %(time, type(time) ))
-        print("relative error: %s type = %s" %(relerr, type(relerr) ))
-        print("filepaths %s, type = %s" %(filepaths, type(filepaths) ))
+	timearray = [item for sublist in time.tolist() for item in sublist]
+	relerrarray = [item for sublist in relerr.tolist() for time in sublist]
+	#print("time: %s, type = %s " %(timearray, type(timearray)))
+        #print("relative error: %s type = %s" %(relerrarray, type(relerrarray) ))
+        #print("filepaths %s, type = %s" %(filepaths, type(filepaths) ))
         #print([time, relerr, filepaths])
         return 1
 

@@ -23,7 +23,7 @@ celery = Celery('tasks',
 app = Flask(__name__)
 
 # Solve problems 1-6 (we are going to get 6 different tasks)
-problems = range(1, 4) #range(1, 7) # List, for python 3.x: list(range(1, 7))
+problems = range(1, 3) #range(1, 7) # List, for python 3.x: list(range(1, 7))
 
 # Store the reulsts, name of solver, execution time and relative error
 allResults = []
@@ -37,7 +37,7 @@ def start_benchmark_task():
     # Sends tasks (request) to rabbit
     for problem_to_solve in problems:
         results = celery.send_task('celery_tasks.benchmark', args = [problem_to_solve]) # results is a list
-        allResults.append(results)
+        #allResults.append(results)
     #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
     #print("---Execution time %s seconds ---" % (time.time() - start_time))
     return "HELLO DUDE" #str(allResults)
