@@ -4,12 +4,13 @@ import os
 import time
 
 from flask import Flask
-from flask import url_for
+#from flask import url_for
 
 from celery import Celery
-from celery.result import AsyncResult
-import celery.states as states
+#from celery.result import AsyncResult
+#import celery.states as states
 from celery_tasks import benchmark
+
 # Creates celery worker
 env = os.environ
 CELERY_BROKER_URL = env.get('CELERY_BROKER_URL','amqp://group_11:wearegroup_11@localhost/group_11_vhost'),
@@ -36,10 +37,11 @@ def start_benchmark_task():
     # Sends tasks (request) to rabbit
     for problem_to_solve in problems:
         #all_results.update(celery.send_task('celery_tasks.benchmark', args = [problem_to_solve]))
-        benchmark.delay()
+        a = benchmark.delay(problem_to_solve)
+        #all_results.update(a)
     #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
     #print("---Execution time %s seconds ---" % (time.time() - start_time))
-    return [t.get() for t in all_results]
+    return "hello" #[t.get() for t in all_results]
 
 if(__name__ == '__main__'):
     app.run(host = '0.0.0.0', debug = True)
