@@ -23,7 +23,8 @@ celery = Celery('tasks',
 app = Flask(__name__)
 
 # Lists of problem (Different variables (see table.m))
-problems = ['prob1.m','prob2.m','prob3.m']
+#problems = ['prob1.m','prob2.m','prob3.m']
+
 
 # Store the reulsts, execution time and relative error
 allResults = []
@@ -33,14 +34,15 @@ allResults = []
 # in list variable "problem"
 @app.route('/benchmark',methods = ['GET'])
 def start_benchmark_task():
-    start_time = time.time()
+    #start_time = time.time()
     # Sends tasks (request) to rabbit
-    for problem_name in problems:
-      results = celery.send_task('celery_tasks.benchmark', args = [problem_name]) # results is a list
-      allResults.append(results)
-      #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
-    print("---Execution time %s seconds ---" % (time.time() - start_time))
-    return str(allResults)
+    #for problem_name in problems:
+    problem_to_sovle = 1
+    results = celery.send_task('celery_tasks.benchmark' args = [problem_to_solve]) # results is a list
+    allResults.append(results)
+    #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
+    #print("---Execution time %s seconds ---" % (time.time() - start_time))
+    #return str(allResults)
 
 if(__name__ == '__main__'):
     app.run(host = '0.0.0.0', debug = True)
