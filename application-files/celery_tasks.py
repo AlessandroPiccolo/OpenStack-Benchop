@@ -21,4 +21,4 @@ def benchmark(problem_to_solve):
 	relerrarray = [item for sublist in relerr.tolist() for time in sublist]
 	# Merge three lists into dictionary
         #return {z[0]:list(z[1:]) for z in zip(filepaths,timearray,relerrarray)} 
-	return [1,2,3]
+	return 1
