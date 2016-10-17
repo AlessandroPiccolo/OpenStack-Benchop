@@ -34,7 +34,7 @@ problems = range(1, 3) #range(1, 7) # List, for python 3.x: list(range(1, 7))
 def start_benchmark_task():
     #start_time = time.time()
     # Store the reulsts, name of solver, execution time and relative error
-    all_results = []
+    all_results = {}
     # rs = ResultSet([])
     # Sends tasks (request) to rabbit
     #for problem_to_solve in problems:
