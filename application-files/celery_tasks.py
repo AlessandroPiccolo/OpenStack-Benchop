@@ -14,10 +14,10 @@ celery = Celery('tasks',
 # Run octave benchmark test for a specific problem (enviroment), returns list of time and rel error
 @celery.task(name = 'celery_tasks.benchmark')
 def benchmark(problem_to_solve):
-        time, relerr, filepathsBSeuCallUI = octave.table(problem_to_solve)
+        time, relerr, filepaths = octave.tablee(problem_to_solve)
         print("time: %s, type = %s " %(time, type(time) ))
         print("relative error: %s type = %s" %(relerr, type(relerr) ))
-        print("filepaths %s, type = %s" %(filepathsBSeuCallUI, type(filepathsBSeuCallUI) ))
-        #print([time, relerr, filepathsBSeuCallUI])
+        print("filepaths %s, type = %s" %(filepaths, type(filepaths) ))
+        #print([time, relerr, filepaths])
         return 1
 
