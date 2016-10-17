@@ -19,7 +19,11 @@ U=[2.758443856146076 7.485087593912603 14.702019669720769];
 filepathsBSeuCallUI=getfilenames('./','BSeuCallUI_*.m');
 par = {S,K,T,r,sig};
 [time, relerr] = executor(rootpath, filepathsBSeuCallUI, U, par);
-filepathsBSeuCallUI = filepathsBSeuCallUI'
+filepathsBSeuCallUI = filepathsBSeuCallUI';
+time = time';
+relerr = relerr';
+
+
 cd(rootpath);
 
 % %% Problem 1 b) I
