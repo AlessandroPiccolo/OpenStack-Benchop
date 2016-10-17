@@ -11,16 +11,14 @@ celery = Celery('tasks',
                 broker = CELERY_BROKER_URL,
                 backend = CELERY_RESULT_BACKEND)
 
-# Run octave benchmark test for a specific problem (enviroment), returns list of time and rel error
-#Making time into normal array and then "flattining"
+# Run octave benchmark test for a specific problem (enviroment)
+# Returns dictionary ['solver': [time, relative_error]]
 @celery.task(name = 'celery_tasks.benchmark')
 def benchmark(problem_to_solve):
         time, relerr, filepaths = octave.tablee(problem_to_solve)
+	# Making time and relerr into normal list and then "flattining" (dont want list in list [[]])
 	timearray = [item for sublist in time.tolist() for item in sublist]
 	relerrarray = [item for sublist in relerr.tolist() for time in sublist]
-	#print("time: %s, type = %s " %(timearray, type(timearray)))
-        #print("relative error: %s type = %s" %(relerrarray, type(relerrarray) ))
-        #print("filepaths %s, type = %s" %(filepaths, type(filepaths) ))
-        #print([time, relerr, filepaths])
-        return 1
+	# Merge three lists into dictionary
+        return {z[0]:list(z[1:]) for z in zip(filepaths,timearray,relerrarray)} 
 
