@@ -25,22 +25,20 @@ app = Flask(__name__)
 # Solve problems 1-6 (we are going to get 6 different tasks)
 problems = range(1, 3) #range(1, 7) # List, for python 3.x: list(range(1, 7))
 
-# Store the reulsts, name of solver, execution time and relative error
-allResults = []
-
 # Enables user to ping flaskto send an request to the rabbit queue
 # We get x number of tasks depending on the number of problems definied
 # in list variable "problem"
 @app.route('/benchmark',methods = ['GET'])
 def start_benchmark_task():
     #start_time = time.time()
+    # Store the reulsts, name of solver, execution time and relative error
+    all_results = {}
     # Sends tasks (request) to rabbit
     for problem_to_solve in problems:
-        results = celery.send_task('celery_tasks.benchmark', args = [problem_to_solve]) # results is a list
-        #allResults.append(results)
+        all_results.append(celery.send_task('celery_tasks.benchmark', args = [problem_to_solve]))
     #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
     #print("---Execution time %s seconds ---" % (time.time() - start_time))
-    return "HELLO DUDE" #str(allResults)
+    return [t.get() for t in all_results]
 
 if(__name__ == '__main__'):
     app.run(host = '0.0.0.0', debug = True)
