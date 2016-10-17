@@ -39,7 +39,7 @@ def start_benchmark_task():
     #for problem_to_solve in problems:
         #all_results.update(celery.send_task('celery_tasks.benchmark', args = [problem_to_solve]))
         #rs.add(benchmark.delay(problem_to_solve))
-    herp = group(benchmark.delay(problem_to_solve) for problem_to_solve in problems)().get()
+    herp = group(benchmark.delay(problem_to_solve) for problem_to_solve in problems).get()
     print herp
     #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
     #print("---Execution time %s seconds ---" % (time.time() - start_time))
