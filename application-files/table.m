@@ -1,6 +1,6 @@
 % Copyright (c) 2015, BENCHOP, Slobodan Milovanović
 
-function [time, relerr, filepathsBSeuCallUI] = Table(problem_to_solve)
+function [time, relerr, filepathsBSeuCallUI] = table(problem_to_solve)
 clear
 close all
 format long
