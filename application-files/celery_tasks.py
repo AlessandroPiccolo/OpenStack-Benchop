@@ -11,9 +11,9 @@ celery = Celery('tasks',
                 broker = CELERY_BROKER_URL,
                 backend = CELERY_RESULT_BACKEND)
 
-# Run octave benchmark test for a specific problem (enviroment)
+# Run octave benchmark test for a specific problem (enviroment), returns list of time and rel error
 @celery.task(name = 'celery_tasks.benchmark')
-def benchmark(problemName):
-        octave.run(problemName)
-        return octave.timeBSeuCallUI(), octave.relerrBSeuCallUI()
+def benchmark(problem_to_solve):
+        time, relerr = octave.table(problem_to_solve)
+        return time, relerr
 
