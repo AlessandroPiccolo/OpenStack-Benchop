@@ -15,9 +15,9 @@ celery = Celery('tasks',
 @celery.task(name = 'celery_tasks.benchmark')
 def benchmark(problem_to_solve):
         time, relerr, filepathsBSeuCallUI = octave.table(problem_to_solve)
-        print("time: %s" %time)
-        print("relative error: %s" %relerr)
-        print("filepaths %s" %filepathsBSeuCallUI)
+        print("time: %s, type = %s " %(time, type(time) ))
+        print("relative error: %s type = %s" %(relerr, type(relerr) ))
+        print("filepaths %s, type = %s" %(filepathsBSeuCallUI, type(filepathsBSeuCallUI) ))
         #print([time, relerr, filepathsBSeuCallUI])
         return 1
 
