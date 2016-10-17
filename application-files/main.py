@@ -1,72 +1,47 @@
-#curl -i http://127.0.0.1:5000/benchmark/api/v0.1/tasks
-from flask import Flask, jsonify
-#import oct2py
-from oct2py import octave
-from celery_tasks import make_celery
+# Creates flask and rabbit server for the celery workers to connect
+# By Andrea Rylander, Alessandro Piccolo & Abdullah Al Hinai
+
+import os
 import time
 
+from flask import Flask  
+from flask import url_for
+
+from celery import Celery  
+from celery.result import AsyncResult  
+import celery.states as states
+
+# Creates celery worker
+env=os.environ
+CELERY_BROKER_URL=env.get('CELERY_BROKER_URL','redis://localhost:6379'),  
+CELERY_RESULT_BACKEND=env.get('CELERY_RESULT_BACKEND','redis://localhost:6379')
+
+celery= Celery('tasks',
+                broker=CELERY_BROKER_URL,
+                backend=CELERY_RESULT_BACKEND)
+
+# Creating the flask app, light weight webb framework
 app = Flask(__name__)
 
-
-app = Flask(__name__)
-app.config['CELERY_BROKER_URL']='amqp://guest@localhost//'
-app.config['CELERY_BACKEND']='amqp://'
-
+# Lists of problem (Different variables (see table.m))
 problems = ['prob1.m','prob2.m','prob3.m']
-#allResults = {}
+
+# Store the reulsts, execution time and relative error
 allResults = []
 
-
-celery = make_celery(app)
+# Enables user to ping flaskto send an request to the rabbit queue
+# We get x number of tasks depending on the number of problems definied
+# in list variable "problem"
 @app.route('/benchmark',methods=['GET'])
-def get_tasks():
-    #return jsonify(results1,results2)  #will return the json
+def start_benchmark_task():
     start_time = time.time()
-    for data in problems:
-      #print data
-      results = benchmark(data)
-      #allResults.update(("The times:\n %s, \n\n The relative errors:\n %s \n" % (results)))
-      #allResults[data] = results
+    # Sends tasks (request) to rabbit
+    for problem_name in problems:
+      results = celery.send_task('celery_tasks.benchmark', args = [problem_name]) # results is a list
       allResults.append(results)
-      #allResults[data] = ("The times:\n %s, \n\n The relative errors:\n %s \n" % (results))
       print data + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results)
-
     print("---Execution time %s seconds ---" % (time.time() - start_time))
     return str(allResults)
-    
-@app.route('/benchmarkAll',methods=['GET'])
-def get_tasks1():
-    #return jsonify(results1,results2)  #will return the json
-      start_time = time.time()
-      results = benchmark(problems[0]) + benchmark1(problems[1]) + benchmark2(problems[2]) 
-      print("---Execution time %s seconds ---" % (time.time() - start_time))
-      #allResults.update(("The times:\n %s, \n\n The relative errors:\n %s \n" % (results)))
-      #allResults[data] = results
-      #allResults.append(results)
-      #allResults[data] = ("The times:\n %s, \n\n The relative errors:\n %s \n" % (results))
-      #print " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results)
-      print " Results from BanchAll", (results)
-      return str(results)
-
-
-@celery.task(name='main.benchmark')
-def benchmark(problemName):
-        octave.run(problemName)
-
-	return octave.timeBSeuCallUI(), octave.relerrBSeuCallUI()
-
-@celery.task(name='main.benchmark1')
-def benchmark1(problemName):
-        octave.run(problemName)
-
-	return octave.timeBSeuCallUI(), octave.relerrBSeuCallUI()
-
-
-@celery.task(name='main.benchmark2')
-def benchmark2(problemName):
-        octave.run(problemName)
-
-	return octave.timeBSeuCallUI(), octave.relerrBSeuCallUI()
 
 if(__name__ == '__main__'):
     app.run(host='0.0.0.0', debug = True)

@@ -1,27 +1,19 @@
-# Import the necessary package to process data in JSON format
+# Creates celery worker and defines the benchmark task to do
+import os
 from celery import Celery
-from celery.result import AsyncResult
+from oct2py import octave
 
-def make_celery(app):
-	celery=Celery(app.import_name, backend=app.config['CELERY_BACKEND'],
-		broker = app.config['CELERY_BROKER_URL'])
-	celery.conf.update(app.config)
-	TaskBase = celery.Task
-	class ContextTask(TaskBase):
-		abstract = True
-		def __call__(self, *args, **kwargs):
-			with app.app_context():
-				return TaskBase.__call__(self,*args,**kwargs)
-	celery.Task = ContextTask
-	return celery
+env = os.environ
+CELERY_BROKER_URL = env.get('CELERY_BROKER_URL','amqp://guest@localhost//'),
+CELERY_RESULT_BACKEND = env.get('CELERY_RESULT_BACKEND','amqp://')
 
-#octave.run('Table.m')
+celery = Celery('tasks',
+                broker = CELERY_BROKER_URL,
+                backend = CELERY_RESULT_BACKEND)
 
+# Run octave benchmark test for a specific problem (enviroment)
+@celery.task(name = 'celery_tasks.benchmark')
+def benchmark(problemName):
+        octave.run(problemName)
+        return octave.timeBSeuCallUI(), octave.relerrBSeuCallUI()
 
-
-
-#create a celery application instance that connects to the default RabbitMQ service
-#app = Celery('tasks', backend='amqp', broker='amqp://')
-
-
-#def benchmark(problem,solver):
