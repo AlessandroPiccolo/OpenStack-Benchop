@@ -4,7 +4,7 @@ from celery import Celery
 from oct2py import octave
 
 env = os.environ
-CELERY_BROKER_URL = env.get('CELERY_BROKER_URL','amqp://guest@localhost//'),
+CELERY_BROKER_URL = env.get('CELERY_BROKER_URL','amqp://group_11:wearegrup_11@localhost/group_11_vhost'),
 CELERY_RESULT_BACKEND = env.get('CELERY_RESULT_BACKEND','amqp://')
 
 celery = Celery('tasks',

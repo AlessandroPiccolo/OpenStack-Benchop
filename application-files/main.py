@@ -1,24 +1,23 @@
 # Creates flask and rabbit server for the celery workers to connect
 # By Andrea Rylander, Alessandro Piccolo & Abdullah Al Hinai
-
 import os
 import time
 
-from flask import Flask  
+from flask import Flask
 from flask import url_for
 
-from celery import Celery  
-from celery.result import AsyncResult  
+from celery import Celery
+from celery.result import AsyncResult
 import celery.states as states
 
 # Creates celery worker
-env=os.environ
-CELERY_BROKER_URL=env.get('CELERY_BROKER_URL','redis://localhost:6379'),  
-CELERY_RESULT_BACKEND=env.get('CELERY_RESULT_BACKEND','redis://localhost:6379')
+env = os.environ
+CELERY_BROKER_URL = env.get('CELERY_BROKER_URL','amqp://group_11:wearegrup_11@localhost/group_11_vhost'),
+CELERY_RESULT_BACKEND = env.get('CELERY_RESULT_BACKEND','amqp://')
 
-celery= Celery('tasks',
-                broker=CELERY_BROKER_URL,
-                backend=CELERY_RESULT_BACKEND)
+celery = Celery('tasks',
+                broker = CELERY_BROKER_URL,
+                backend = CELERY_RESULT_BACKEND)
 
 # Creating the flask app, light weight webb framework
 app = Flask(__name__)
@@ -32,16 +31,16 @@ allResults = []
 # Enables user to ping flaskto send an request to the rabbit queue
 # We get x number of tasks depending on the number of problems definied
 # in list variable "problem"
-@app.route('/benchmark',methods=['GET'])
+@app.route('/benchmark',methods = ['GET'])
 def start_benchmark_task():
     start_time = time.time()
     # Sends tasks (request) to rabbit
     for problem_name in problems:
       results = celery.send_task('celery_tasks.benchmark', args = [problem_name]) # results is a list
       allResults.append(results)
-      print data + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results)
+      print problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results)
     print("---Execution time %s seconds ---" % (time.time() - start_time))
     return str(allResults)
 
 if(__name__ == '__main__'):
-    app.run(host='0.0.0.0', debug = True)
+    app.run(host = '0.0.0.0', debug = True)
