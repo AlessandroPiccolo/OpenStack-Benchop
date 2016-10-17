@@ -1,6 +1,7 @@
 # Import the necessary package to process data in JSON format
 from celery import Celery
 from celery.result import AsyncResult
+
 def make_celery(app):
 	celery=Celery(app.import_name, backend=app.config['CELERY_BACKEND'],
 		broker = app.config['CELERY_BROKER_URL'])
