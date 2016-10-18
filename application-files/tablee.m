@@ -32,7 +32,7 @@ elseif problem_to_solve == 2
     
     filepathsBSamPutUI=getfilenames('./','BSamPutUI_*.m');
     par={S,K,T,r,sig};
-    [timeBSamPutUI,relerrBSamPutUI] = executor(rootpath,filepathsBSamPutUI,U,par)
+    [timeBSamPutUI,relerrBSamPutUI] = executor(rootpath,filepathsBSamPutUI,U,par);
     cd(rootpath);
     
     filepaths = filepathsBSamPutUI';
@@ -46,7 +46,7 @@ elseif problem_to_solve == 3
     
     filepathsBSupoutCallI=getfilenames('./','BSupoutCallI_*.m');
     par={S,K,T,r,sig,B};
-    [timeBSupoutCallI,relerrBSupoutCallI] = executor(rootpath,filepathsBSupoutCallI,U,par)
+    [timeBSupoutCallI,relerrBSupoutCallI] = executor(rootpath,filepathsBSupoutCallI,U,par);
     cd(rootpath);
     
     filepaths = filepathsBSupoutCallI';
@@ -60,7 +60,7 @@ elseif problem_to_solve == 4
     
     filepathsBSeuCallUII=getfilenames('./','BSeuCallUII_*.m');
     par={S,K,T,r,sig};
-    [timeBSeuCallUII,relerrBSeuCallUII] = executor(rootpath,filepathsBSeuCallUII,U,par)
+    [timeBSeuCallUII,relerrBSeuCallUII] = executor(rootpath,filepathsBSeuCallUII,U,par);
     cd(rootpath);
     
     filepaths = filepathsBSeuCallUII';
@@ -74,7 +74,7 @@ elseif problem_to_solve == 5
     
     filepathsBSamPutUII=getfilenames('./','BSamPutUII_*.m');
     par={S,K,T,r,sig};
-    [timeBSamPutUII,relerrBSamPutUII] = executor(rootpath,filepathsBSamPutUII,U,par)
+    [timeBSamPutUII,relerrBSamPutUII] = executor(rootpath,filepathsBSamPutUII,U,par);
     cd(rootpath);
     
     filepaths = filepathsBSamPutUII';
@@ -88,7 +88,7 @@ elseif problem_to_solve == 6
     
     filepathsBSupoutCallII=getfilenames('./','BSupoutCallII_*.m');
     par={S,K,T,r,sig,B};
-    [timeBSupoutCallII,relerrBSupoutCallII] = executor(rootpath,filepathsBSupoutCallII,U,par)
+    [timeBSupoutCallII,relerrBSupoutCallII] = executor(rootpath,filepathsBSupoutCallII,U,par);
     cd(rootpath);
     
     filepaths = filepathsBSupoutCallII';
