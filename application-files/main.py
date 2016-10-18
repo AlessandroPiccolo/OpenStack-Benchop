@@ -26,7 +26,7 @@ celery = Celery('tasks',
 app = Flask(__name__)
 
 # Solve problems 1-6 (we are going to get 6 different tasks)
-problems = range(1, 7) # List, for python 3.x: list(range(1, 7))
+problems = range(1, 4) # List, for python 3.x: list(range(1, 7))
 
 # Enables user to ping flask to send an request to the rabbit queue
 # We get x number of tasks depending on the number of problems definied
