@@ -17,8 +17,9 @@ runcmd:
  - sudo locale-gen sv_SE.UTF-8
  - sudo apt install -y python-pip
  - sudo pip install celery
- - sudo apt --yes --force-yes install python-celery-common
+ - sudo apt install -y python-celery-common
  - sudo pip install flask
  - sudo apt-get install -y octave
  - sudo pip install oct2py
+ - sudo apt-get install -y python-scipy
  - git clone https://github.com/AndreaRylander/Cloudgroup11.git
