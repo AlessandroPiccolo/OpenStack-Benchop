@@ -19,13 +19,7 @@ def benchmark(problem_to_solve):
 	# Matlab: function [time, relerr, filepaths] = tablee(problem_to_solve), problem_to_solve = [1:6]
 	time, relerr, filepaths = octave.tablee(problem_to_solve)
 	# Making time and relerr into normal list and then "flattining" (dont want list in list [[]])
-	print('time = %s' %time)
-	print('relerr = %s' %relerr)
-	print(filepaths)
 	timearray = [item for sublist in time.tolist() for item in sublist]
 	relerrarray = [item for sublist in relerr.tolist() for item in sublist]
-	print("Timearray: %s"%timearray)
-	print("Relative: %s"%relerrarray)
 	# Merge three lists into dictionary
-	print {z[0]:list(z[1:]) for z in zip(filepaths,timearray,relerrarray)}
 	return  {z[0]:list(z[1:]) for z in zip(filepaths,timearray,relerrarray)}
