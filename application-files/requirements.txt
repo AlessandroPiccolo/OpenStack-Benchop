@@ -1,3 +1,4 @@
 Flask
 oct2py
 celery
+scipy
