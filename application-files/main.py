@@ -42,16 +42,16 @@ def start_benchmark_task():
         #all_results.update(celery.send_task('celery_tasks.benchmark', args = [problem_to_solve]))
         #rs.add(benchmark.delay(problem_to_solve))
     
-    #herp = group(benchmark.delay(problem_to_solve) for problem_to_solve in problems).get()
-    #g = group(benchmark.s(1), benchmark.s(2))
-    #g = group(benchmark.s(problem_to_solve) for problem_to_solve in problems)
-    #g.apply_async()
-    #herp = g() 
-    #print herp.get()  #we can print it directly 
-    #result_maybe = herp.get()
+                                                #herp = group(benchmark.delay(problem_to_solve) for problem_to_solve in problems).get()
+                                                #g = group(benchmark.s(1), benchmark.s(2))
+                                                #g = group(benchmark.s(problem_to_solve) for problem_to_solve in problems)
+                                                #g.apply_async()
+                                                #herp = g() 
+                                                #print herp.get()  #we can print it directly 
+                                                #result_maybe = herp.get()
     
-    results = group(benchmark.s(1), benchmark.s(2))().get()
-    ###### works results = group(benchmark.s(problem_to_solve) for problem_to_solve in problems)().get()
+    #results = group(benchmark.s(1), benchmark.s(2))().get()
+    results = group(benchmark.s(problem_to_solve) for problem_to_solve in problems)().get()
 
     print ('results_maybe = %s, type = %s' %(results, type(results) ) )
     
