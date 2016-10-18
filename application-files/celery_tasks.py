@@ -15,10 +15,11 @@ celery = Celery('tasks',
 # Returns dictionary ['solver': [time, relative_error]]
 @celery.task(name = 'celery_tasks.benchmark')
 def benchmark(problem_to_solve):
-        time, relerr, filepaths = octave.tablee(problem_to_solve)
+	#time, relerr, filepaths = octave.tablee(problem_to_solve)
 	# Making time and relerr into normal list and then "flattining" (dont want list in list [[]])
-	timearray = [item for sublist in time.tolist() for item in sublist]
-	relerrarray = [item for sublist in relerr.tolist() for time in sublist]
+	#timearray = [item for sublist in time.tolist() for item in sublist]
+	#relerrarray = [item for sublist in relerr.tolist() for time in sublist]
 	# Merge three lists into dictionary
-        return {z[0]:list(z[1:]) for z in zip(filepaths,timearray,relerrarray)} 
+	#return  {z[0]:list(z[1:]) for z in zip(filepaths,timearray,relerrarray)}
+        return {'jack': 4098, 'sape': 4139} # {z[0]:list(z[1:]) for z in zip(filepaths,timearray,relerrarray)}
 	#return 1

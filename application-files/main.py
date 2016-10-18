@@ -44,7 +44,7 @@ def start_benchmark_task():
     g = group(benchmark.s(1), benchmark.s(2))
     herp = g()
     result_maybe = herp.get()
-    print result_maybe
+    print ('results_maybe = %s, type = %s' %(result_maybe, type(result_maybe) ))
     #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
     #print("---Execution time %s seconds ---" % (time.time() - start_time))
     return "hello is it working?"
