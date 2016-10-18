@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+<meta charset="utf-8" /> <title>Maaatlab </title>      <!-- import plugin script -->   
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+<style type="text/css">
+	#center-page {
+        	margin: auto;
+        	width: 50%;
+        	text-align: center;
+        	border: 3px solid green;
+        	padding: 10px;
+	}
+	
+	#right {
+    		position: absolute;
+    		right: 0px;
+    		width: 300px;
+    		border: 3px solid #73AD21;
+    		padding: 10px;
+}
+</style>
+</head>
+<body>
+	<div id="center-page">
+		<h1>Matlab stuff</h1>
+		<h3 id="status"> More matlab stuff  </h3>
+		<dl>
+			{% for key, value in result_maybe[0].iteritems() %}
+				<dt>{{ key }}</dt>
+				<dd>{{ value }}</dd>
+			{% endfor %}
+		</dl>
+	</div>
+</body>
+</html>
+

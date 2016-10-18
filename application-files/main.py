@@ -11,7 +11,8 @@ from celery import Celery
 #import celery.states as states
 from celery import group
 from celery_tasks import benchmark
-
+from flask import Markup
+from flask import render_template
 # Creates celery worker
 env = os.environ
 CELERY_BROKER_URL = env.get('CELERY_BROKER_URL','amqp://group_11:wearegroup_11@localhost/group_11_vhost')
@@ -25,7 +26,7 @@ celery = Celery('tasks',
 app = Flask(__name__)
 
 # Solve problems 1-6 (we are going to get 6 different tasks)
-problems = range(1, 3) #range(1, 7) # List, for python 3.x: list(range(1, 7))
+problems = range(1, 2) #range(1, 7) # List, for python 3.x: list(range(1, 7))
 
 # Enables user to ping flaskto send an request to the rabbit queue
 # We get x number of tasks depending on the number of problems definied
@@ -50,7 +51,7 @@ def start_benchmark_task():
     print ('results_maybe = %s, type = %s' %(result_maybe, type(result_maybe) ))
     #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
     #print("---Execution time %s seconds ---" % (time.time() - start_time))
-    return "hello is it working?"
+    return render_template('index.html', result_maybe=result_maybe)
 
 if(__name__ == '__main__'):
     app.run(host = '0.0.0.0', debug = True)
