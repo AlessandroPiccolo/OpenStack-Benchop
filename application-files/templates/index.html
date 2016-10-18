@@ -26,9 +26,11 @@
 		<h1>Matlab stuff</h1>
 		<h3 id="status"> More matlab stuff  </h3>
 		<dl>
-			{% for key, value in results[0].iteritems() %}
-				<dt>{{ key }}</dt>
-				<dd>{{ value }}</dd>
+			{% for i in results %}
+				{% for key, value in i.iteritems() %}
+					<dt>{{ key }}</dt>
+					<dd>{{ value }}</dd>
+				{% endfor %}
 			{% endfor %}
 		</dl>
 	</div>
