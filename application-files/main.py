@@ -55,7 +55,7 @@ def start_benchmark_task():
     
     #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
     #print("---Execution time %s seconds ---" % (time.time() - start_time))
-    return render_template('index.html', result_maybe=result_maybe)
+    return render_template('index.html', results=results)
 
 if(__name__ == '__main__'):
     app.run(host = '0.0.0.0', debug = True)
