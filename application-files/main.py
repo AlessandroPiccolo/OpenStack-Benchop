@@ -50,7 +50,9 @@ def start_benchmark_task():
     #print herp.get()  #we can print it directly 
     #result_maybe = herp.get()
     
-    results = group(benchmark.s(problem_to_solve) for problem_to_solve in problems)().get()
+    results = group(benchmark.s(1), benchmark.s(2))().get()
+    ###### works results = group(benchmark.s(problem_to_solve) for problem_to_solve in problems)().get()
+
     print ('results_maybe = %s, type = %s' %(results, type(results) ) )
     
     #print (problem_name + " \nThe times:\n %s, \n\n The relative errors:\n %s \n" % (results))
