@@ -12,8 +12,6 @@ from celery import group
 from celery_tasks import benchmark
 
 import pygal
-from pygal.style import DarkSolarizedStyle
-from pygal.style import Style
 
 # Creates celery worker
 env = os.environ
@@ -50,20 +48,17 @@ def start_benchmark_task(sig):
 			time_list.append(value[0])
 			relerr_list.append(value[1])
 	
-	custom_style_blue = Style(colors= ('#2f00ff') ) 
-	custom_style_red = Style(colors = ('#ff0000') ) 
-	
-	line_chart_time = pygal.Bar(style=custom_style_blue)  
+	line_chart_time = pygal.Bar()  
 	line_chart_time.x_labels = map(str, x_label_string)
-	line_chart_time.add('Time', time_list)
+	line_chart_time.add('Time', time_list, 'color': 'purple')
 	line_chart_time.y_title = "Execution time [s]"
 	line_chart_time.title = "Execution time for different option price solvers"
 	#line_chart.render()
 	line_chart_time_data = line_chart_time.render_data_uri()
 	
-	line_chart_rerr = pygal.Bar(style=custom_style_red)  
+	line_chart_rerr = pygal.Bar()  
 	line_chart_rerr.x_labels = map(str, x_label_string)
-	line_chart_rerr.add('Relative Error', relerr_list)
+	line_chart_rerr.add('Relative Error', relerr_list, 'color': 'red')
 	line_chart_rerr.y_title = "Relative error"
 	line_chart_rerr.title = "Relative error for different option price solvers"
 	#line_chart.render()
