@@ -45,9 +45,9 @@ def start_benchmark_task(sig):
     
 	for i in results:
 		for key, value in i.iteritems():
-			x_label_string.add(key)
-			time_list.add(value[0])
-			relerr_list.add(value[1])
+			x_label_string.append(key)
+			time_list.append(value[0])
+			relerr_list.append(value[1])
           
 	line_chart.x_labels = map(x_label_string)
 	line_chart.add('Time', time_list)
