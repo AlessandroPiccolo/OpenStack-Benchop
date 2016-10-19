@@ -20,6 +20,7 @@ RUN apt-get install -y python python-dev python-distribute python-pip
 
 #Install RabbitMQ-server
 RUN apt-get install -y rabbitmq-server
+
 # Install octave
 RUN apt-get install -y octave
 
