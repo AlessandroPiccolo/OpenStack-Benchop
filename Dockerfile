@@ -49,8 +49,11 @@ RUN export LC_ALL=C
 EXPOSE 80
 
 # Download awsome repository
-RUN git clone https://github.com/AndreaRylander/Cloudgroup11.git ~/home/Cloudgroup11
+RUN git clone https://github.com/AndreaRylander/Cloudgroup11.git /home/Cloudgroup11
+
+# Run celery with sudo 
+RUN export C_FORCE_ROOT="true"
 
 # Set the default directory where CMD will execute
-WORKDIR ~/home/Cloudgroup11/application-files/¨ls
+WORKDIR /home/Cloudgroup11/application-files/
 
