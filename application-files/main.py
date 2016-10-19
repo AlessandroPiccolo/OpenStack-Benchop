@@ -48,9 +48,12 @@ def start_benchmark_task(sig):
 			time_list.append(value[0])
 			relerr_list.append(value[1])
 	
+	time_list.append({'color': 'purple'})
+	relerr_list.append({'color': 'red'})
+	
 	line_chart_time = pygal.Bar()  
 	line_chart_time.x_labels = map(str, x_label_string)
-	line_chart_time.add('Time', time_list, 'color': 'purple')
+	line_chart_time.add('Time', time_list)
 	line_chart_time.y_title = "Execution time [s]"
 	line_chart_time.title = "Execution time for different option price solvers"
 	#line_chart.render()
