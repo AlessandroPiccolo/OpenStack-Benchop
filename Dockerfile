@@ -37,6 +37,7 @@ RUN export LC_ALL=C
 RUN pip install flask
 RUN pip install oct2py
 RUN pip install celery
+RUN pip install pygal
 
 #Install celery-common
 RUN apt install -y python-celery-common
