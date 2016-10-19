@@ -12,6 +12,7 @@ from celery import group
 from celery_tasks import benchmark
 
 import pygal
+from pygal.style import Style
 
 # Creates celery worker
 env = os.environ
@@ -47,11 +48,27 @@ def start_benchmark_task(sig):
 			x_label_string.append(key)
 			time_list.append(value[0])
 			relerr_list.append(value[1])
+		
+		
+	style_lightblue = Style(
+        background='white',
+        plot_background='rgba(0, 0, 255, 0.03)',
+        foreground='rgba(0, 0, 0, 0.8)',
+        foreground_light='rgba(0, 0, 0, 0.9)',
+        foreground_dark='rgba(0, 0, 0, 0.7)',
+        colors=('#F15854')
+        )
 	
-	time_list.append({'color': 'purple'})
-	relerr_list.append({'color': 'red'})
+	style_red = Style(
+        background='white',
+        plot_background='rgba(0, 0, 255, 0.03)',
+        foreground='rgba(0, 0, 0, 0.8)',
+        foreground_light='rgba(0, 0, 0, 0.9)',
+        foreground_dark='rgba(0, 0, 0, 0.7)',
+        colors=('#f94a39')
+        )
 	
-	line_chart_time = pygal.Bar()  
+	line_chart_time = pygal.Bar(style=style_lightblue)  
 	line_chart_time.x_labels = map(str, x_label_string)
 	line_chart_time.add('Time', time_list)
 	line_chart_time.y_title = "Execution time [s]"
@@ -59,7 +76,7 @@ def start_benchmark_task(sig):
 	#line_chart.render()
 	line_chart_time_data = line_chart_time.render_data_uri()
 	
-	line_chart_rerr = pygal.Bar()  
+	line_chart_rerr = pygal.Bar(style=style_red)  
 	line_chart_rerr.x_labels = map(str, x_label_string)
 	line_chart_rerr.add('Relative Error', relerr_list)
 	line_chart_rerr.y_title = "Relative error"
