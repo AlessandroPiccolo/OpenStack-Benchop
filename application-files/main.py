@@ -51,16 +51,16 @@ def start_benchmark_task(sig):
 	line_chart_time = pygal.Bar()  
 	line_chart_time.x_labels = map(str, x_label_string)
 	line_chart_time.add('Time', time_list)
-	line_chart_time.y_title = "Relative usage of pronomen in tweets [%]"
-	line_chart_time.title = "Usage of different pronumens in tweets"
+	line_chart_time.y_title = "Execution time [s]"
+	line_chart_time.title = "Execution time for different option price solvers"
 	#line_chart.render()
 	line_chart_time_data = line_chart_time.render_data_uri()
 	
 	line_chart_rerr = pygal.Bar()  
 	line_chart_rerr.x_labels = map(str, x_label_string)
 	line_chart_rerr.add('Relative Error', relerr_list)
-	line_chart_rerr.y_title = "Relative usage of pronomen in tweets [%]"
-	line_chart_rerr.title = "Usage of different pronumens in tweets"
+	line_chart_rerr.y_title = "Relative error"
+	line_chart_rerr.title = "Relative error for different option price solvers"
 	#line_chart.render()
 	line_chart_rerr_data = line_chart_rerr.render_data_uri()
 	
