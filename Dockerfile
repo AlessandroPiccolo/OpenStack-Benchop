@@ -46,6 +46,7 @@ RUN apt-get install -y python-scipy
 
 # Export local variable (obscure error)
 RUN export LC_ALL=C
+RUN export C_FORCE_ROOT="true"
 
 # Expose ports
 EXPOSE 80
