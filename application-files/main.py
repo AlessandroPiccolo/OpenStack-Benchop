@@ -38,7 +38,6 @@ def start_benchmark_task(sig):
 	results = group(benchmark.s(problem_to_solve,sig) for problem_to_solve in problems)().get()
     
 	# Create bar chart with pygal
-	line_chart = pygal.Bar()
 	x_label_string = []
 	time_list = []
 	relerr_list = []
@@ -48,16 +47,24 @@ def start_benchmark_task(sig):
 			x_label_string.append(key)
 			time_list.append(value[0])
 			relerr_list.append(value[1])
-          
-	line_chart.x_labels = map(str, x_label_string)
-	line_chart.add('Time', time_list)
-	line_chart.add('Relative Error',  relerr_list)
-	line_chart.y_title = "Relative usage of pronomen in tweets [%]"
-	line_chart.title = "Usage of different pronumens in tweets"
+			
+	line_chart_time = pygal.Bar()  
+	line_chart_time.x_labels = map(str, x_label_string)
+	line_chart_time.add('Time', time_list)
+	line_chart_time.y_title = "Relative usage of pronomen in tweets [%]"
+	line_chart_time.title = "Usage of different pronumens in tweets"
 	#line_chart.render()
-	line_chart_data = line_chart.render_data_uri()
+	line_chart_time_data = line_chart_time.render_data_uri()
 	
-	return render_template("graphing.html", line_chart_data = line_chart_data)
+	line_chart_rerr = pygal.Bar()  
+	line_chart_rerr.x_labels = map(str, x_label_string)
+	line_chart_rerr.add('Relative Error', relerr_list)
+	line_chart_rerr.y_title = "Relative usage of pronomen in tweets [%]"
+	line_chart_rerr.title = "Usage of different pronumens in tweets"
+	#line_chart.render()
+	line_chart_rerr_data = line_chart_rerr.render_data_uri()
+	
+	return render_template("graphing.html", line_chart_time = line_chart_time, line_chart_rerr_data = line_chart_rerr_data)
 
 if(__name__ == '__main__'):
 	app.run(host = '0.0.0.0', debug = True)
