@@ -31,11 +31,11 @@ problems = range(1, 4) # List, for python 3.x: list(range(1, 7))
 # Enables user to ping flask to send an request to the rabbit queue
 # We get x number of tasks depending on the number of problems definied
 # in list variable "problem"
-@app.route('/benchmark',methods = ['GET'])
-def start_benchmark_task():
+@app.route('/benchmark/<sig>',methods = ['GET'])
+def start_benchmark_task(sig):
     # Creates all tasks and puts them in queue. get() makes this function wait untill all tasks are completed
     # All output from the tasks are going to be appended in our results variable (it is a long list)
-    results = group(benchmark.s(problem_to_solve) for problem_to_solve in problems)().get()
+    results = group(benchmark.s(problem_to_solve,sig) for problem_to_solve in problems)().get()
     return render_template('index.html', results=results)
 
 if(__name__ == '__main__'):
