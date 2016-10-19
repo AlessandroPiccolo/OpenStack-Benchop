@@ -64,7 +64,7 @@ def start_benchmark_task(sig):
 	#line_chart.render()
 	line_chart_rerr_data = line_chart_rerr.render_data_uri()
 	
-	return render_template("graphing.html", line_chart_time = line_chart_time, line_chart_rerr_data = line_chart_rerr_data)
+	return render_template("graphing.html", line_chart_time_data = line_chart_time_data, line_chart_rerr_data = line_chart_rerr_data)
 
 if(__name__ == '__main__'):
 	app.run(host = '0.0.0.0', debug = True)
