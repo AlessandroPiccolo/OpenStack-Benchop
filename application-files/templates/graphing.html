@@ -26,6 +26,14 @@
 		<div class="container" align="left">
 			<embed type="image/svg+xml" src={{line_chart_rerr_data|safe}} style = 'max-width:1000px'/>
 	        </div>
+		<dl>
+			{% for i in results %}
+				{% for key, value in i.iteritems() %}
+					<dt>{{ key }}</dt>
+					<dd>{{ value }}</dd>
+				{% endfor %}
+			{% endfor %}
+		</dl>
 	</div>
 </body>
 </html>
