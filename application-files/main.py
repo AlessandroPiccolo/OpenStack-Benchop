@@ -33,6 +33,7 @@ problems = [1,3] # List, for python 3.x: list(range(1, 7))
 # We get x number of tasks depending on the number of problems definied
 # in list variable "problem"
 @app.route('/benchmark/<float:sig>',defaults={'sig': 0.15}, methods = ['GET'])
+@app.route('/benchmark', methods = ['GET'])
 def start_benchmark_task(sig):
 	# Creates all tasks and puts them in queue. get() makes this function wait untill all tasks are completed
 	# All output from the tasks are going to be appended in our results variable (it is a long list)
