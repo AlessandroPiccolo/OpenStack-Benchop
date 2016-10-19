@@ -13,7 +13,7 @@ from celery_tasks import benchmark
 
 import pygal
 from pygal.style import Style
-from pygal.style import NeonStyle
+from pygal.style import BlueStyle
 
 # Creates celery worker
 env = os.environ
@@ -51,7 +51,7 @@ def start_benchmark_task(sig):
 			time_list.append(value[0])
 			relerr_list.append(value[1])
 
-	line_chart_time = pygal.Bar(style=NeonStyle)  
+	line_chart_time = pygal.Bar(style=BlueStyle)  
 	line_chart_time.x_labels = map(str, x_label_string)
 	line_chart_time.add('Time', time_list)
 	line_chart_time.y_title = "Execution time [s]"
@@ -59,7 +59,7 @@ def start_benchmark_task(sig):
 	#line_chart.render()
 	line_chart_time_data = line_chart_time.render_data_uri()
 	
-	line_chart_rerr = pygal.Bar(style=NeonStyle)  
+	line_chart_rerr = pygal.Bar(style=BlueStyle)  
 	line_chart_rerr.x_labels = map(str, x_label_string)
 	line_chart_rerr.add('Relative Error', relerr_list)
 	line_chart_rerr.y_title = "Relative error"
