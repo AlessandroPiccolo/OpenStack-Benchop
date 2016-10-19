@@ -26,7 +26,7 @@ celery = Celery('tasks',
 app = Flask(__name__)
 
 # Solve problems 1-6 (we are going to get 6 different tasks)
-problems = range(1, 3) # List, for python 3.x: list(range(1, 7))
+problems = [1,3] # List, for python 3.x: list(range(1, 7))
 
 # Enables user to ping flask to send an request to the rabbit queue
 # We get x number of tasks depending on the number of problems definied
@@ -49,7 +49,7 @@ def start_benchmark_task(sig):
 			time_list.append(value[0])
 			relerr_list.append(value[1])
           
-	line_chart.x_labels = map(x_label_string)
+	line_chart.x_labels = map(str, x_label_string)
 	line_chart.add('Time', time_list)
 	line_chart.add('Relative Error',  relerr_list)
 	line_chart.y_title = "Relative usage of pronomen in tweets [%]"
