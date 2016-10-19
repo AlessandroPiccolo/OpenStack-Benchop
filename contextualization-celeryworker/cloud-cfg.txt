@@ -22,4 +22,5 @@ runcmd:
  - sudo apt-get install -y octave
  - sudo pip install oct2py
  - sudo apt-get install -y python-scipy
+ - sudo pip install pygal
  - git clone https://github.com/AndreaRylander/Cloudgroup11.git /home/ubuntu/benchop-files
