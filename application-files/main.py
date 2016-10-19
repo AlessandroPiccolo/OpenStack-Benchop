@@ -50,8 +50,8 @@ def start_benchmark_task(sig):
 			time_list.append(value[0])
 			relerr_list.append(value[1])
 	
-	custom_style_blue = Style(colors= ('blue') ) 
-	custom_style_red = Style(colors = ('red') ) 
+	custom_style_blue = Style(colors= ('#2f00ff') ) 
+	custom_style_red = Style(colors = ('#ff0000') ) 
 	
 	line_chart_time = pygal.Bar(style=custom_style_blue)  
 	line_chart_time.x_labels = map(str, x_label_string)
