@@ -61,7 +61,7 @@ def start_benchmark_task(sig):
 	
 	line_chart_rerr = pygal.Bar()  
 	line_chart_rerr.x_labels = map(str, x_label_string)
-	line_chart_rerr.add('Relative Error', relerr_list, 'color': 'red')
+	line_chart_rerr.add('Relative Error', relerr_list)
 	line_chart_rerr.y_title = "Relative error"
 	line_chart_rerr.title = "Relative error for different option price solvers"
 	#line_chart.render()
