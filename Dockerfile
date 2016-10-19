@@ -29,14 +29,13 @@ RUN apt-get -y upgrade
 # Export local variable (obscure error)
 RUN export LC_ALL=C
 
-# Download awsome repository
-RUN git clone https://github.com/AndreaRylander/Cloudgroup11.git
-
 # Export local variable (obscure error)
 RUN export LC_ALL=C
 
 # Get pip to download and install requirements:
-RUN pip install -r Cloudgroup11/application-files/requirements.txt
+RUN pip install flask
+RUN pip install oct2py
+RUN pip install celery
 
 #Install celery-common
 RUN apt install -y python-celery-common
@@ -49,5 +48,9 @@ RUN export LC_ALL=C
 # Expose ports
 EXPOSE 80
 
+# Download awsome repository
+RUN git clone https://github.com/AndreaRylander/Cloudgroup11.git ~/home/Cloudgroup11
+
 # Set the default directory where CMD will execute
-WORKDIR Cloudgroup11/application-files/
+WORKDIR ~/home/Cloudgroup11/application-files/¨ls
+
