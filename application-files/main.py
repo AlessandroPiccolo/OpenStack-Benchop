@@ -56,7 +56,7 @@ def start_benchmark_task(sig):
         foreground='rgba(0, 0, 0, 0.8)',
         foreground_light='rgba(0, 0, 0, 0.9)',
         foreground_dark='rgba(0, 0, 0, 0.7)',
-        colors=('#F15854')
+        colors=('#F15854',)
         )
 	
 	style_pink = Style(
@@ -65,7 +65,7 @@ def start_benchmark_task(sig):
         foreground='rgba(0, 0, 0, 0.8)',
         foreground_light='rgba(0, 0, 0, 0.9)',
         foreground_dark='rgba(0, 0, 0, 0.7)',
-        colors=('#F17CB0')
+        colors=('#F17CB0',)
         )
 	
 	line_chart_time = pygal.Bar(style=style_lightblue)  
