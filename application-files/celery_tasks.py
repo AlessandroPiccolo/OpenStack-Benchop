@@ -15,9 +15,9 @@ celery = Celery('tasks',
 # Run octave benchmark test for a specific problem (enviroment)
 # Returns dictionary ['solver': [time, relative_error]]
 @celery.task(name = 'celery_tasks.benchmark')
-def benchmark(problem_to_solve):
+def benchmark(problem_to_solve,sig):
 	# Matlab: function [time, relerr, filepaths] = tablee(problem_to_solve), problem_to_solve = [1:6]
-	time, relerr, filepaths = octave.tablee(problem_to_solve)
+	time, relerr, filepaths = octave.tablee(problem_to_solve,sig)
 	# Making time and relerr into normal list and then "flattining" (dont want list in list [[]])
 	timearray = [item for sublist in time.tolist() for item in sublist]
 	relerrarray = [item for sublist in relerr.tolist() for item in sublist]
