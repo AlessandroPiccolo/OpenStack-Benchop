@@ -1,7 +1,7 @@
 % Copyright (c) 2015, BENCHOP, Slobodan MilovanoviÄ‡
 
 % Input problem_to_solve is string to know which problem to use
-function [time, relerr, filepaths] = tablee(problem_to_solve, )
+function [time, relerr, filepaths] = tablee(problem_to_solve, sig)
 format long
 warning off
 
