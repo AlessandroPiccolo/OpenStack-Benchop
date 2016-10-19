@@ -59,13 +59,13 @@ def start_benchmark_task(sig):
         colors=('#F15854')
         )
 	
-	style_red = Style(
+	style_pink = Style(
         background='white',
         plot_background='rgba(0, 0, 255, 0.03)',
         foreground='rgba(0, 0, 0, 0.8)',
         foreground_light='rgba(0, 0, 0, 0.9)',
         foreground_dark='rgba(0, 0, 0, 0.7)',
-        colors=('#f94a39')
+        colors=('#F17CB0')
         )
 	
 	line_chart_time = pygal.Bar(style=style_lightblue)  
@@ -76,7 +76,7 @@ def start_benchmark_task(sig):
 	#line_chart.render()
 	line_chart_time_data = line_chart_time.render_data_uri()
 	
-	line_chart_rerr = pygal.Bar(style=style_red)  
+	line_chart_rerr = pygal.Bar(style=style_pink)  
 	line_chart_rerr.x_labels = map(str, x_label_string)
 	line_chart_rerr.add('Relative Error', relerr_list)
 	line_chart_rerr.y_title = "Relative error"
