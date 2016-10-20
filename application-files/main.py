@@ -27,7 +27,7 @@ celery = Celery('tasks',
 # Creating the flask app, light weight webb framework
 app = Flask(__name__)
 
-# Solve problems 1-6 (we are going to get 6 different tasks)
+# Solve problems 1-6 (we are going to get 6 different tasks) change here for choosing problem to solve!
 problems = [1,3] # List, for python 3.x: list(range(1, 7))
 
 # Enables user to ping flask to send an request to the rabbit queue
