@@ -55,7 +55,7 @@ else:
 
 
 print "Creating instance ... "
-instance = nova.servers.create(name="alessandro_vm_auto2", image=image, flavor=flavor, userdata=userdata, nics=nics,security_groups=secgroups, key_name="alessandroCloud")
+instance = nova.servers.create(name="group_11_docker", image=image, flavor=flavor, userdata=userdata, nics=nics,security_groups=secgroups, key_name="alessandroCloud")
 inst_status = instance.status
 print "waiting for 10 seconds.. "
 time.sleep(10)
